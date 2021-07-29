@@ -1,0 +1,70 @@
+<div>
+              <canvas id="mycanvas" height="200" width="200"></canvas>
+</div>
+            <script type="text/javascript" src ="https://cdn.jsdelivr.net/npm/chart.js@3.4.0/dist/chart.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+            <script>
+            const div = d3.selectAll("div");
+            </script>
+            <script>
+              let filename = 'dataset1.csv';
+              d3.csv(filename).then(function(loadedData) {
+                console.log(loadedData);
+                let labels = [];
+
+                let hr = [];
+                let o2 = [];
+                let temp = [];
+                let bp = [];
+                for(let i=0; i<loadedData.length; i++){
+                  let time = loadedData[i].Time;
+                  labels.push(time)
+                  let hrr = loadedData[i].HR;
+                  hr.push(hrr)
+                  let sp = loadedData[i].SpO2;
+                  o2.push(sp)
+                  let tem = loadedData[i].Temp;
+                  temp.push(tem)
+                  let bpp = loadedData[i].NBP;
+                  bp.push(bpp)
+
+                }
+                let options = {
+                  type: 'line',
+                  data: {
+                    labels: labels,
+                    datasets: [{
+                      label: 'hr',
+                      data:hr,
+                      fill:false,
+                      pointRadius: 0,
+                      pointHoverRadius: 0,
+                      borderColor: 'rgb(255,100,100)'
+                    }, {
+                      label: 'o2',
+                      data:o2,
+                      fill:false,
+                      pointRadius: 0,
+                      pointHoverRadius: 0,
+                      borderColor: 'rgb(100,255,100)'
+                    }, {
+                      label: 'temp',
+                      data:temp,
+                      fill:false,
+                      pointRadius: 0,
+                      pointHoverRadius: 0,
+                      borderColor: 'rgb(100,100,255)'
+                    }, {
+                      label: 'bp',
+                      data:bp,
+                      fill:false,
+                      pointRadius: 0,
+                      pointHoverRadius: 0,
+                      borderColor: 'rgb(100,255,255)'
+                    },
+                    ]
+                  }
+                };
+                let chart = new Chart(document.getElementById('mycanvas'), options);
+              });
+            </script>
